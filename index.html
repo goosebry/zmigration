@@ -285,7 +285,7 @@
             <div class="result-row primary-model">
                 <div>
                     <span class="result-label">Primary Model (95% weight)</span>
-                    <div class="model-info">Weighted: 0.2S + 0.7H + 0.1T + 0.3V</div>
+                    <div class="model-info">0.1S + 0.9H + 0.05T + 0.45V (Hero weighted)</div>
                 </div>
                 <span class="result-value" id="model6">-</span>
             </div>
@@ -327,9 +327,9 @@
             // Model 5: Power Law - Score = 0.0021 × Total^2.0141
             const model5 = 0.0021 * Math.pow(total, 2.0141);
             
-            // Model 6: Weighted - Base = 0.2S + 0.7H + 0.1T + 0.3V, Score = 0.0092 × Base^2.0886
-            const base6 = 0.200 * structure + 0.700 * hero + 0.100 * tech + 0.300 * truck;
-            const model6 = 0.0092 * Math.pow(base6, 2.0886);
+            // Model 6: Refined with 7 data points - Hero is most important
+            const base6 = 0.1000 * structure + 0.9000 * hero + 0.0500 * tech + 0.4500 * truck;
+            const model6 = 0.007222 * Math.pow(base6, 2.0778);
             
             // Model 3: Scaling - Est × (1.2734 × ln(Total) - 5.0378)
             const est = total * 0.26;
