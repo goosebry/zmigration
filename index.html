@@ -284,7 +284,7 @@
             
             <div class="result-row primary-model">
                 <div>
-                    <span class="result-label">Primary Model (85% weight)</span>
+                    <span class="result-label">Primary Model (95% weight)</span>
                     <div class="model-info">Weighted: 0.2S + 0.7H + 0.1T + 0.3V</div>
                 </div>
                 <span class="result-value" id="model6">-</span>
@@ -292,7 +292,7 @@
             
             <div class="result-row secondary">
                 <div>
-                    <span class="result-label">Secondary Models (15% weight)</span>
+                    <span class="result-label">Secondary Models (5% weight)</span>
                     <div class="model-info">Power Law & Scaling averaged</div>
                 </div>
                 <span class="result-value" id="secondary">-</span>
@@ -336,9 +336,9 @@
             const scaling = 1.2734 * Math.log(total) - 5.0378;
             const model3 = est * scaling;
             
-            // Weighted Average: Model 6 = 85%, others = 15%
+            // Weighted Average: Model 6 = 95%, others = 5%
             const secondaryAvg = (model5 + model3) / 2;
-            const weightedScore = (model6 * 0.85) + (secondaryAvg * 0.15);
+            const weightedScore = (model6 * 0.95) + (secondaryAvg * 0.05);
             
             // Display results
             document.getElementById('totalPower').textContent = total.toFixed(1) + 'M';
