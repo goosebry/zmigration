@@ -160,6 +160,32 @@
             border-top: 2px solid rgba(255,255,255,0.2);
         }
         
+        .result-row.primary-model {
+            background: rgba(59, 130, 246, 0.15);
+            margin: 0 -24px;
+            padding: 12px 24px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .result-row.primary-model .result-label {
+            color: #60a5fa;
+            font-weight: 500;
+        }
+        
+        .result-row.primary-model .result-value {
+            color: #60a5fa;
+        }
+        
+        .result-row.secondary .result-label {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+        
+        .result-row.secondary .result-value {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+        
         .result-row.average {
             background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(22, 163, 74, 0.2) 100%);
             margin: 16px -24px -24px -24px;
@@ -256,28 +282,20 @@
                 <span class="result-value" id="totalPower">-</span>
             </div>
             
-            <div class="result-row">
+            <div class="result-row primary-model">
                 <div>
-                    <span class="result-label">Model 5 (Power Law)</span>
-                    <div class="model-info">0.0021 × Total²</div>
-                </div>
-                <span class="result-value" id="model5">-</span>
-            </div>
-            
-            <div class="result-row">
-                <div>
-                    <span class="result-label">Model 6 (Weighted)</span>
-                    <div class="model-info">0.2S + 0.7H + 0.1T + 0.3V weighted</div>
+                    <span class="result-label">Primary Model (85% weight)</span>
+                    <div class="model-info">Weighted: 0.2S + 0.7H + 0.1T + 0.3V</div>
                 </div>
                 <span class="result-value" id="model6">-</span>
             </div>
             
-            <div class="result-row">
+            <div class="result-row secondary">
                 <div>
-                    <span class="result-label">Model 3 (Scaling)</span>
-                    <div class="model-info">Est × ln(Total) scaling</div>
+                    <span class="result-label">Secondary Models (15% weight)</span>
+                    <div class="model-info">Power Law & Scaling averaged</div>
                 </div>
-                <span class="result-value" id="model3">-</span>
+                <span class="result-value" id="secondary">-</span>
             </div>
             
             <div class="result-row average">
@@ -318,15 +336,15 @@
             const scaling = 1.2734 * Math.log(total) - 5.0378;
             const model3 = est * scaling;
             
-            // Average
-            const average = (model5 + model6 + model3) / 3;
+            // Weighted Average: Model 6 = 85%, others = 15%
+            const secondaryAvg = (model5 + model3) / 2;
+            const weightedScore = (model6 * 0.85) + (secondaryAvg * 0.15);
             
             // Display results
             document.getElementById('totalPower').textContent = total.toFixed(1) + 'M';
-            document.getElementById('model5').textContent = model5.toFixed(1);
             document.getElementById('model6').textContent = model6.toFixed(1);
-            document.getElementById('model3').textContent = model3.toFixed(1);
-            document.getElementById('average').textContent = average.toFixed(1);
+            document.getElementById('secondary').textContent = secondaryAvg.toFixed(1);
+            document.getElementById('average').textContent = weightedScore.toFixed(1);
             
             document.getElementById('results').classList.add('show');
         }
